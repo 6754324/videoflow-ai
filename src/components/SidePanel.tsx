@@ -5,7 +5,7 @@ import { generateTasks } from '../ai/generate'
 import { STAGES } from '../data/stages'
 
 const fieldCls =
-  'w-full rounded-md border border-white/10 bg-ink-800 px-2.5 py-1.5 text-sm text-zinc-100 outline-none focus:border-brand-500/60'
+  'w-full rounded-md border border-ink-200 bg-paper-200 px-2.5 py-1.5 text-sm text-ink-900 outline-none focus:border-brand-500/60'
 
 function AiTab() {
   const topic = useFlowStore((s) => s.topic)
@@ -27,7 +27,7 @@ function AiTab() {
 
   return (
     <div className="space-y-3">
-      <div className="rounded-md border border-white/10 bg-ink-800/40 p-3 text-xs leading-relaxed text-zinc-400">
+      <div className="rounded-md border border-ink-200 bg-paper-200/40 p-3 text-xs leading-relaxed text-ink-500">
         {topic.trim() || '先在顶部输入选题，或点击「载入示例」。'}
       </div>
       <input
@@ -40,11 +40,11 @@ function AiTab() {
       <button
         onClick={onGenerate}
         disabled={generating || !topic.trim()}
-        className="w-full rounded-md bg-accent-600 px-3 py-2 text-sm font-medium text-ink-950 transition hover:bg-accent-500 disabled:opacity-50"
+        className="w-full rounded-md bg-accent-600 px-3 py-2 text-sm font-medium text-paper-50 transition hover:bg-accent-500 disabled:opacity-50"
       >
         {generating ? '生成中…' : '✨ 根据选题生成任务清单'}
       </button>
-      <p className="text-[11px] leading-relaxed text-zinc-600">
+      <p className="text-[11px] leading-relaxed text-ink-400">
         {source === 'api' && '已用 AI 模型生成任务，可继续编辑与排程。'}
         {source === 'demo' && '未配置 API Key，已载入示例任务清单（可离线体验）。'}
         {!source && '未配置 Key 时使用内置示例，配置后走 DeepSeek 实时生成。'}
@@ -62,7 +62,7 @@ function TaskTab() {
   const toggleDependency = useFlowStore((s) => s.toggleDependency)
 
   if (!selected) {
-    return <p className="py-10 text-center text-sm text-zinc-600">在左侧看板点击一个任务查看详情</p>
+    return <p className="py-10 text-center text-sm text-ink-400">在左侧看板点击一个任务查看详情</p>
   }
 
   const others = tasks.filter((t) => t.id !== selected.id)
@@ -70,7 +70,7 @@ function TaskTab() {
   return (
     <div className="space-y-3">
       <label className="block">
-        <span className="mb-1 block text-xs text-zinc-500">任务名</span>
+        <span className="mb-1 block text-xs text-ink-400">任务名</span>
         <input
           className={fieldCls}
           value={selected.title}
@@ -79,7 +79,7 @@ function TaskTab() {
       </label>
       <div className="grid grid-cols-2 gap-2">
         <label className="block">
-          <span className="mb-1 block text-xs text-zinc-500">阶段</span>
+          <span className="mb-1 block text-xs text-ink-400">阶段</span>
           <select
             className={fieldCls}
             value={selected.stage}
@@ -93,7 +93,7 @@ function TaskTab() {
           </select>
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs text-zinc-500">工时（小时）</span>
+          <span className="mb-1 block text-xs text-ink-400">工时（小时）</span>
           <input
             className={fieldCls}
             type="number"
@@ -107,7 +107,7 @@ function TaskTab() {
         </label>
       </div>
       <label className="block">
-        <span className="mb-1 block text-xs text-zinc-500">负责人</span>
+        <span className="mb-1 block text-xs text-ink-400">负责人</span>
         <input
           className={fieldCls}
           placeholder="编导 / 摄影 / 剪辑 / 运营…"
@@ -115,7 +115,7 @@ function TaskTab() {
           onChange={(e) => updateTask(selected.id, { assignee: e.target.value })}
         />
       </label>
-      <label className="flex items-center gap-2 text-sm text-zinc-300">
+      <label className="flex items-center gap-2 text-sm text-ink-600">
         <input
           type="checkbox"
           className="accent-brand-500"
@@ -126,13 +126,13 @@ function TaskTab() {
       </label>
 
       <div>
-        <span className="mb-1 block text-xs text-zinc-500">前置任务（依赖）</span>
+        <span className="mb-1 block text-xs text-ink-400">前置任务（依赖）</span>
         {others.length === 0 ? (
-          <p className="text-xs text-zinc-600">没有其他任务</p>
+          <p className="text-xs text-ink-400">没有其他任务</p>
         ) : (
-          <div className="max-h-44 space-y-1 overflow-auto rounded-md border border-white/10 bg-ink-800/40 p-2">
+          <div className="max-h-44 space-y-1 overflow-auto rounded-md border border-ink-200 bg-paper-200/40 p-2">
             {others.map((t) => (
-              <label key={t.id} className="flex items-center gap-2 text-sm text-zinc-300">
+              <label key={t.id} className="flex items-center gap-2 text-sm text-ink-600">
                 <input
                   type="checkbox"
                   className="accent-brand-500"
@@ -148,7 +148,7 @@ function TaskTab() {
 
       <button
         onClick={() => removeTask(selected.id)}
-        className="w-full rounded-md border border-rose-500/30 px-3 py-2 text-sm text-rose-400 transition hover:bg-rose-500/10"
+        className="w-full rounded-md border border-rose-500/30 px-3 py-2 text-sm text-rose-600 transition hover:bg-rose-500/10"
       >
         删除任务
       </button>
@@ -166,44 +166,44 @@ function PathTab() {
   return (
     <div className="space-y-4">
       <div>
-        <div className="mb-1 flex items-baseline justify-between text-xs text-zinc-500">
+        <div className="mb-1 flex items-baseline justify-between text-xs text-ink-400">
           <span>进度（按工时加权）</span>
-          <span className="font-mono text-zinc-300">{progress.percent.toFixed(0)}%</span>
+          <span className="font-mono text-ink-600">{progress.percent.toFixed(0)}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-white/5">
+        <div className="h-2 overflow-hidden rounded-full bg-ink-900/5">
           <div
             className="h-full rounded-full bg-brand-500 transition-all"
             style={{ width: `${progress.percent}%` }}
           />
         </div>
-        <p className="mt-1 text-[11px] text-zinc-600">
+        <p className="mt-1 text-[11px] text-ink-400">
           {progress.doneCount} / {progress.totalCount} 项任务已完成
         </p>
       </div>
 
       <div>
-        <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+        <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-ink-400">
           关键路径
         </h3>
         {!schedule ? (
-          <p className="rounded-md border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-xs text-rose-300">
+          <p className="rounded-md border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-xs text-rose-700">
             依赖关系存在环，无法排程 — 请检查前置任务。
           </p>
         ) : schedule.order.length === 0 ? (
-          <p className="text-xs text-zinc-600">还没有任务</p>
+          <p className="text-xs text-ink-400">还没有任务</p>
         ) : (
           <div className="space-y-2">
-            <div className="rounded-md bg-white/5 px-3 py-2 text-xs text-zinc-400">
-              项目总时长 <span className="font-mono text-white">{schedule.projectDuration}h</span>
+            <div className="rounded-md bg-ink-900/5 px-3 py-2 text-xs text-ink-500">
+              项目总时长 <span className="font-mono text-ink-900">{schedule.projectDuration}h</span>
             </div>
             <ol className="space-y-1">
               {schedule.order
                 .filter((id) => schedule.timing.get(id)?.critical)
                 .map((id, i) => (
-                  <li key={id} className="flex items-center gap-2 text-xs text-zinc-300">
-                    <span className="text-zinc-600">{i + 1}.</span>
+                  <li key={id} className="flex items-center gap-2 text-xs text-ink-600">
+                    <span className="text-ink-400">{i + 1}.</span>
                     <span className="truncate">{title(id)}</span>
-                    <span className="ml-auto shrink-0 font-mono text-zinc-500">
+                    <span className="ml-auto shrink-0 font-mono text-ink-400">
                       {durationOf(id)}h
                     </span>
                   </li>
@@ -215,12 +215,12 @@ function PathTab() {
 
       {ready.length > 0 && (
         <div>
-          <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+          <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-ink-400">
             可开始
           </h3>
           <ul className="space-y-1">
             {ready.map((t) => (
-              <li key={t.id} className="truncate text-xs text-emerald-300">
+              <li key={t.id} className="truncate text-xs text-emerald-700">
                 · {t.title || '未命名任务'}
               </li>
             ))}
@@ -230,12 +230,12 @@ function PathTab() {
 
       {blocked.length > 0 && (
         <div>
-          <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+          <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-ink-400">
             被阻塞
           </h3>
           <ul className="space-y-1">
             {blocked.map((t) => (
-              <li key={t.id} className="truncate text-xs text-amber-400/90">
+              <li key={t.id} className="truncate text-xs text-amber-600/90">
                 · {t.title || '未命名任务'}
               </li>
             ))}
@@ -251,7 +251,7 @@ export function SidePanel() {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex shrink-0 gap-1 border-b border-white/10 p-1.5">
+      <div className="flex shrink-0 gap-1 border-b border-ink-200 p-1.5">
         {(
           [
             ['ai', 'AI 助手'],
@@ -263,7 +263,7 @@ export function SidePanel() {
             key={key}
             onClick={() => setTab(key)}
             className={`flex-1 rounded-md px-3 py-1.5 text-sm transition ${
-              tab === key ? 'bg-white/10 text-white' : 'text-zinc-500 hover:text-zinc-300'
+              tab === key ? 'bg-ink-900/8 text-ink-900' : 'text-ink-400 hover:text-ink-600'
             }`}
           >
             {label}

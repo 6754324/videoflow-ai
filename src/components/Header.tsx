@@ -45,13 +45,13 @@ export function Header() {
   }
 
   return (
-    <header className="flex h-14 shrink-0 items-center gap-3 border-b border-white/10 px-4">
+    <header className="flex h-14 shrink-0 items-center gap-3 border-b border-ink-200 px-4">
       <div className="flex items-baseline gap-2.5">
-        <h1 className="font-display text-lg font-semibold tracking-tight text-white">VideoFlow AI</h1>
-        <span className="text-xs text-zinc-500">视频制作流水线 · 关键路径排程</span>
+        <h1 className="font-display text-lg font-semibold tracking-tight text-ink-900">VideoFlow AI</h1>
+        <span className="text-xs text-ink-400">视频制作流水线 · 关键路径排程</span>
       </div>
       <input
-        className="mx-4 min-w-0 flex-1 rounded-md border border-white/10 bg-ink-800 px-3 py-1.5 text-sm text-zinc-100 outline-none focus:border-brand-500/60"
+        className="mx-4 min-w-0 flex-1 rounded-md border border-ink-200 bg-paper-200 px-3 py-1.5 text-sm text-ink-900 outline-none focus:border-brand-500/60"
         placeholder="项目选题，如：城市里的独立书店"
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
@@ -59,21 +59,21 @@ export function Header() {
       <div className="flex shrink-0 items-center gap-2">
         <button
           onClick={loadDemo}
-          className="rounded-md border border-white/10 px-3 py-1.5 text-sm text-zinc-300 transition hover:border-white/20 hover:text-white"
+          className="rounded-md border border-ink-200 px-3 py-1.5 text-sm text-ink-600 transition hover:border-ink-300 hover:text-ink-900"
         >
           载入示例
         </button>
         <button
           onClick={clearAll}
           disabled={tasks.length === 0 && topic === ''}
-          className="rounded-md border border-white/10 px-3 py-1.5 text-sm text-zinc-400 transition hover:text-white disabled:opacity-40"
+          className="rounded-md border border-ink-200 px-3 py-1.5 text-sm text-ink-500 transition hover:text-ink-900 disabled:opacity-40"
         >
           清空
         </button>
         <button
           onClick={exportPlan}
           disabled={tasks.length === 0}
-          className="rounded-md bg-brand-600 px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-brand-500 disabled:opacity-40"
+          className="rounded-md bg-brand-600 px-3.5 py-1.5 text-sm font-medium text-paper-50 transition hover:bg-brand-500 disabled:opacity-40"
         >
           导出计划
         </button>

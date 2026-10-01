@@ -27,7 +27,7 @@ const TaskCard = memo(function TaskCard({
       className={`cursor-pointer rounded-md border p-2.5 transition ${
         selected
           ? 'border-brand-500/60 bg-brand-500/5'
-          : 'border-white/10 bg-ink-800/50 hover:border-white/20'
+          : 'border-ink-200 bg-paper-200/50 hover:border-ink-300'
       } ${blocked ? 'opacity-55' : ''}`}
     >
       <div className="flex items-start gap-2">
@@ -43,16 +43,16 @@ const TaskCard = memo(function TaskCard({
           placeholder="任务名"
           onClick={(e) => e.stopPropagation()}
           onChange={(e) => updateTask(task.id, { title: e.target.value })}
-          className={`min-w-0 flex-1 bg-transparent text-sm text-zinc-100 outline-none placeholder:text-zinc-600 ${
-            task.done ? 'text-zinc-500 line-through' : ''
+          className={`min-w-0 flex-1 bg-transparent text-sm text-ink-900 outline-none placeholder:text-ink-400 ${
+            task.done ? 'text-ink-400 line-through' : ''
           }`}
         />
       </div>
-      <div className="mt-2 flex items-center gap-1.5 text-[11px] text-zinc-500">
+      <div className="mt-2 flex items-center gap-1.5 text-[11px] text-ink-400">
         <span className="font-mono">{task.durationHours}h</span>
         {task.assignee && <span>· {task.assignee}</span>}
         {critical && (
-          <span className="rounded bg-accent-500/15 px-1 py-0.5 text-accent-300">关键</span>
+          <span className="rounded bg-accent-500/15 px-1 py-0.5 text-accent-600">关键</span>
         )}
         {task.dependsOn.length > 0 && <span>· {task.dependsOn.length} 依赖</span>}
         <div className="ml-auto flex gap-0.5">
@@ -61,7 +61,7 @@ const TaskCard = memo(function TaskCard({
               e.stopPropagation()
               moveTask(task.id, -1)
             }}
-            className="rounded px-1 text-zinc-500 transition hover:text-white"
+            className="rounded px-1 text-ink-400 transition hover:text-ink-900"
             title="前移阶段"
           >
             ‹
@@ -71,7 +71,7 @@ const TaskCard = memo(function TaskCard({
               e.stopPropagation()
               moveTask(task.id, 1)
             }}
-            className="rounded px-1 text-zinc-500 transition hover:text-white"
+            className="rounded px-1 text-ink-400 transition hover:text-ink-900"
             title="后移阶段"
           >
             ›
@@ -81,7 +81,7 @@ const TaskCard = memo(function TaskCard({
               e.stopPropagation()
               removeTask(task.id)
             }}
-            className="rounded px-1 text-zinc-600 transition hover:text-rose-400"
+            className="rounded px-1 text-ink-400 transition hover:text-rose-600"
             title="删除"
           >
             ✕
@@ -106,16 +106,16 @@ export function Board() {
         return (
           <div
             key={stage.id}
-            className="flex h-full w-64 shrink-0 flex-col rounded-lg border border-white/10 bg-ink-900/60"
+            className="flex h-full w-64 shrink-0 flex-col rounded-lg border border-ink-200 bg-paper-100/60"
           >
-            <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2">
+            <div className="flex items-center gap-2 border-b border-ink-200 px-3 py-2">
               <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${stage.chip}`}>
                 {stage.label}
               </span>
-              <span className="text-xs text-zinc-600">{stageTasks.length}</span>
+              <span className="text-xs text-ink-400">{stageTasks.length}</span>
               <button
                 onClick={() => addTask(stage.id)}
-                className="ml-auto rounded px-1.5 text-zinc-500 transition hover:text-white"
+                className="ml-auto rounded px-1.5 text-ink-400 transition hover:text-ink-900"
                 title="在此阶段添加任务"
               >
                 +
@@ -132,7 +132,7 @@ export function Board() {
                 />
               ))}
               {stageTasks.length === 0 && (
-                <div className="py-6 text-center text-xs text-zinc-700">暂无任务</div>
+                <div className="py-6 text-center text-xs text-ink-400">暂无任务</div>
               )}
             </div>
           </div>
